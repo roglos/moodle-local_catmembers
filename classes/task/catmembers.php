@@ -90,7 +90,15 @@ class catmembers extends \core\task\scheduled_task {
         $subcommidnum = array();
         foreach ($categories as $category) {
             $catid[$category->idnumber] = $category->id;  // Get ALL categories.
-            if (strpos($category->idnumber, 'SUB-') === false || strpos($category->idnumber, 'SUB-') > 0) {
+            // Ignore if not a UOG managed overarching level.
+            if (strpos($category->idnumber, 'SUB-') === false ||
+                strpos($category->idnumber, 'SUB-') > 0 ||
+                strpos($category->idnumber, 'SCH-') === false ||
+                strpos($category->idnumber, 'SCH-') > 0 ) ||
+                strpos($category->idnumber, 'DOM-') === false ||
+                strpos($category->idnumber, 'DOM-') > 0 ||
+                strpos($category->idnumber, 'FAC-') === false ||
+                strpos($category->idnumber, 'FAC-') > 0 )){
                 continue;
             }
             $subcommcats[$category->idnumber] = $category->id;  // Get Subject Communities ids.

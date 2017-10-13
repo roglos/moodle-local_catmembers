@@ -31,6 +31,6 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2018100100;        // The current plugin version (Date: YYYYMMDDXX).
-$plugin->requires  = 2017050500;        // Requires this Moodle version.
+$plugin->version   = 2018101300;        // The current plugin version (Date: YYYYMMDDXX).
+$plugin->requires  = 2016120504;        // Requires this Moodle version.
 $plugin->component = 'local_catmembers';  // Full name of the plugin (used for diagnostics).
