@@ -94,11 +94,11 @@ class catmembers extends \core\task\scheduled_task {
             if (strpos($category->idnumber, 'SUB-') === false ||
                 strpos($category->idnumber, 'SUB-') > 0 ||
                 strpos($category->idnumber, 'SCH-') === false ||
-                strpos($category->idnumber, 'SCH-') > 0 ) ||
+                strpos($category->idnumber, 'SCH-') > 0 ||
                 strpos($category->idnumber, 'DOM-') === false ||
                 strpos($category->idnumber, 'DOM-') > 0 ||
                 strpos($category->idnumber, 'FAC-') === false ||
-                strpos($category->idnumber, 'FAC-') > 0 )){
+                strpos($category->idnumber, 'FAC-') > 0 ) {
                 continue;
             }
             $subcommcats[$category->idnumber] = $category->id;  // Get Subject Communities ids.
@@ -163,9 +163,12 @@ class catmembers extends \core\task\scheduled_task {
                         $catcontextid = $catcontext[$categoryid];  // Context ID.
                     }
 
-                    // Set role assignment for user->id on category->context->id with role->id.
+                    // Set role assignment for user->id on category->context->id with role->id if doesn't exist.
                     if ($userid !== '' && $roleid !== '' && $catcontextid !== '') {
-                        role_assign($roleid, $userid->id, $catcontextid);
+                        if ($DB->get_record('role_assignments',
+                            array('roleid' => $roleid, 'userid' => $userid, 'contextid' => $catcontextid))) {
+                            role_assign($roleid, $userid->id, $catcontextid);
+                        }
                     }
 
                 }
