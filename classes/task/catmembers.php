@@ -166,7 +166,7 @@ class catmembers extends \core\task\scheduled_task {
                     // Set role assignment for user->id on category->context->id with role->id if doesn't exist.
                     if ($userid !== '' && $roleid !== '' && $catcontextid !== '') {
                         if ($DB->get_record('role_assignments',
-                            array('roleid' => $roleid, 'userid' => $userid, 'contextid' => $catcontextid))) {
+                            array('roleid' => $roleid, 'userid' => $userid->id, 'contextid' => $catcontextid))) {
                             role_assign($roleid, $userid->id, $catcontextid);
                         }
                     }
